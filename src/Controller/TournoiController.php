@@ -18,9 +18,7 @@ final class TournoiController extends AbstractController
         $tournoi = new Tournoi();
 
         // Assigner l'utilisateur connecté à 'created_by'
-        //$tournoi->setCreatedBy($this->getUser());  // Assigner l'utilisateur connecté
-
-       
+        // $tournoi->setCreatedBy($this->getUser());  // Assigner l'utilisateur connecté
 
         // Création du formulaire basé sur l'entité Tournoi
         $form = $this->createForm(TournoiType::class, $tournoi);
