@@ -1,0 +1,21 @@
+@use "../abstract/mixins";
+@use "../abstract/variable" as v;
+
+// FOOTER
+
+#footer {
+    background-color: v.$secondarycolor;
+    @include mixins.flex($direction:column);
+    text-align: center;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+
+    img {
+        width: 65px;
+    }
+
+    a {
+        color: black;
+    }
+}
+

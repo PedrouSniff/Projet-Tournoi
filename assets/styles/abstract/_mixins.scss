@@ -1,0 +1,19 @@
+@use "variable" as var;
+
+@mixin flex ($direction : row, $justify : center, $align : center, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+}
+
+@mixin hover ($hcolor: var.$accentcolor) {
+
+    transition: all 300ms;
+
+    &:hover {
+        color: $hcolor;
+        transform: scale(1.1);
+    }
+}
