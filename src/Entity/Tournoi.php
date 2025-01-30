@@ -24,9 +24,6 @@ class Tournoi
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $created_by = null;
-
     /**
      * @var Collection<int, Joueur>
      */
@@ -88,18 +85,6 @@ class Tournoi
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getCreatedBy(): ?string
-    {
-        return $this->created_by;
-    }
-
-    public function setCreatedBy(string $created_by): static
-    {
-        $this->created_by = $created_by;
 
         return $this;
     }
