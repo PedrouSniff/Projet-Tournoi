@@ -14,7 +14,7 @@ class Matchs
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'matchs')]
-    private ?tournoi $tournoi = null;
+    private ?Tournoi $tournoi = null;
 
     #[ORM\ManyToOne(inversedBy: 'matchs')]
     private ?joueur $joueur1 = null;
@@ -36,12 +36,12 @@ class Matchs
         return $this->id;
     }
 
-    public function getTournoi(): ?tournoi
+    public function getTournoi(): ?Tournoi
     {
         return $this->tournoi;
     }
 
-    public function setTournoi(?tournoi $tournoi): static
+    public function setTournoi(?Tournoi $tournoi): static
     {
         $this->tournoi = $tournoi;
 

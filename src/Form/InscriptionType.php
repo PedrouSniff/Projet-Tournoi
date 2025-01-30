@@ -4,12 +4,13 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\classement;
-use Vich\UploaderBundle\Entity\File;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class InscriptionType extends AbstractType
 {
@@ -17,14 +18,9 @@ class InscriptionType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
-            ->add('password')
+            ->add('password', PasswordType::class)
             ->add('nom')
-            ->add('prénom')
-            ->add('created_at', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('imageName')
+            ->add('prenom')
             ->add('imageFile', FileType::class, [
                 'required' => false,
                 'mapped' => true,
@@ -40,7 +36,6 @@ class InscriptionType extends AbstractType
                     ])
                 ],
             ])
-            ->add('updatedAt')
             ->add('classement', EntityType::class, [
                 'class' => classement::class,
                 'choice_label' => 'id',

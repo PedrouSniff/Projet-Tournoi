@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $prénom = null;
+    private ?string $prenom = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -54,10 +55,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;
 
-
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?classement $classement = null;
+    private ?Classement $classement = null;
 
     /**
      * @var Collection<int, Joueur>
@@ -65,9 +65,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Joueur::class, mappedBy: 'user')]
     private Collection $joueurs;
 
+    /**
+     * @var Collection<int, Tournoi>
+     */
+    #[ORM\OneToMany(targetEntity: Tournoi::class, mappedBy: 'User')]
+    private Collection $tournois;
+
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
+        $this->tournois = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -157,14 +165,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPrénom(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->prénom;
+        return $this->prenom;
     }
 
-    public function setPrénom(string $prénom): static
+    public function setPrenom(string $prenom): static
     {
-        $this->prénom = $prénom;
+        $this->prenom = $prenom;
 
         return $this;
     }
@@ -244,6 +252,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($joueur->getUser() === $this) {
                 $joueur->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tournoi>
+     */
+    public function getTournois(): Collection
+    {
+        return $this->tournois;
+    }
+
+    public function addTournoi(Tournoi $tournoi): static
+    {
+        if (!$this->tournois->contains($tournoi)) {
+            $this->tournois->add($tournoi);
+            $tournoi->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTournoi(Tournoi $tournoi): static
+    {
+        if ($this->tournois->removeElement($tournoi)) {
+            // set the owning side to null (unless already changed)
+            if ($tournoi->getUser() === $this) {
+                $tournoi->setUser(null);
             }
         }
 

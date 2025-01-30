@@ -49,12 +49,12 @@ class Joueur
         return $this;
     }
 
-    public function getTournoi(): ?tournoi
+    public function getTournoi(): ?Tournoi
     {
         return $this->tournoi;
     }
 
-    public function setTournoi(?tournoi $tournoi): static
+    public function setTournoi(?Tournoi $tournoi): static
     {
         $this->tournoi = $tournoi;
 

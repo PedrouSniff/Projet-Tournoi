@@ -50,8 +50,8 @@ final class InscriptionUserController extends AbstractController
             // Redirection
             return $this->redirectToRoute('app_home');
         }
-        return $this->render('inscription_user/index.html.twig', [
-            'controller_name' => 'InscriptionUserController',
+        return $this->render('inscription_user/inscription.html.twig', [
+            'userform' => $form->createView()
         ]);
     }
 }

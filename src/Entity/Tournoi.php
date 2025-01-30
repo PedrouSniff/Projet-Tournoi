@@ -24,9 +24,6 @@ class Tournoi
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $created_by = null;
-
     /**
      * @var Collection<int, Joueur>
      */
@@ -41,6 +38,9 @@ class Tournoi
      */
     #[ORM\OneToMany(targetEntity: Matchs::class, mappedBy: 'tournoi')]
     private Collection $matchs;
+
+    #[ORM\ManyToOne(inversedBy: 'tournois')]
+    private ?user $User = null;
 
     public function __construct()
     {
@@ -89,18 +89,6 @@ class Tournoi
         return $this;
     }
 
-    // public function getCreatedBy(): ?string
-    // {
-    //     return $this->created_by;
-    // }
-
-    // public function setCreatedBy(string $created_by): static
-    // {
-    //     $this->created_by = $created_by;
-
-    //     return $this;
-    // }
-
     /**
      * @return Collection<int, Joueur>
      */
@@ -131,12 +119,12 @@ class Tournoi
         return $this;
     }
 
-    public function getType(): ?type
+    public function getType(): ?Type
     {
         return $this->type;
     }
 
-    public function setType(?type $type): static
+    public function setType(?Type $type): static
     {
         $this->type = $type;
 
@@ -169,6 +157,18 @@ class Tournoi
                 $match->setTournoi(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->User;
+    }
+
+    public function setUser(?user $User): static
+    {
+        $this->User = $User;
 
         return $this;
     }
