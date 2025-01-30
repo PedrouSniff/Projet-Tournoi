@@ -16,7 +16,7 @@ class Joueur
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
-    private ?user $user = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
     private ?tournoi $tournoi = null;

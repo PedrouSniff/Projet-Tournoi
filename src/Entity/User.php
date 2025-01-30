@@ -181,12 +181,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getClassement(): ?classement
+    public function getClassement(): ?Classement
     {
         return $this->classement;
     }
 
-    public function setClassement(?classement $classement): static
+    public function setClassement(?Classement $classement): static
     {
         $this->classement = $classement;
 

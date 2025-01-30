@@ -34,7 +34,7 @@ class Tournoi
     private Collection $joueurs;
 
     #[ORM\ManyToOne(inversedBy: 'tournois')]
-    private ?type $type = null;
+    private ?Type $type = null;
 
     /**
      * @var Collection<int, Matchs>
@@ -89,17 +89,17 @@ class Tournoi
         return $this;
     }
 
-    public function getCreatedBy(): ?string
-    {
-        return $this->created_by;
-    }
+    // public function getCreatedBy(): ?string
+    // {
+    //     return $this->created_by;
+    // }
 
-    public function setCreatedBy(string $created_by): static
-    {
-        $this->created_by = $created_by;
+    // public function setCreatedBy(string $created_by): static
+    // {
+    //     $this->created_by = $created_by;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Joueur>
