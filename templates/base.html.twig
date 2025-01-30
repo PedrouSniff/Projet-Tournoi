@@ -9,6 +9,13 @@
     </head>
     <body>
         {% block header %}
+            <nav>
+                <ul>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'app_inscription_user' %} active {% endif %}" href={{ path('app_inscription_user')}}>Inscription</a></li>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'app_login' %} active {% endif %}" href={{ path('app_login')}}>Connexion</a></li>
+                    <li><a class="{% if app.request.attributes.get('_route') == 'app_logout' %} active {% endif %}" href={{ path('app_logout')}}>déconnexion</a></li>
+                </ul>
+            </nav>
         {% endblock %}
 
         {% block main %}
