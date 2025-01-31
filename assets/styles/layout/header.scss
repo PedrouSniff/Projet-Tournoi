@@ -5,47 +5,51 @@
 // HEADER
 
 #header {
-    background-color: v.$secondarycolor;
-    nav {
-        @include mixins.flex($justify: space-between);
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        padding-left: 3rem;
-        padding-right: 3rem;
-        
-        img {
-            background-color: v.$secondarycolor;
-            color: v.$secondarycolor;
-            width: 65px;
-        }
 
-        .nav1 {
-            @include mixins.flex;
+    nav {
+        padding: 2rem 2rem;
+        background-color: v.$primarycolor;
+        @include mixins.flex($direction: row);
+        font-size: 20px;
+
+        .navbar {
+            display: flex;
+            gap: 2rem;
 
             li {
-                a {
-                    display: block;
-                    font-size: 25px;
-                    margin-left: 2rem;
-                    margin-right: 2rem;
-                    color: black    ;
-                    @include mixins.hover
-
-                }
+                @include mixins.hover($hcolor: v.$secondarycolor);
+            }
+             a{
+                color: v.$titrecolor;
+                font-weight: bold;
+                @include mixins.hover($hcolor: v.$secondarycolor);
             }
         }
+    }
+}
 
-        .nav2 {
-            ul {
-                li {
-                    a {
-                        font-size: 15px;
-                        margin-top: 1rem;
-                        color: black    ;
-                        @include mixins.hover;
-                    }
-                }
-            }
-        }
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: v.$bgcolor;
+
+    h1 {
+        padding-bottom: 2rem;
+        font-size: 40px;
+        color: v.$titrecolor;
+    }
+
+    img {
+        width: 80%;
+        max-width: 1200px;
+        height: 30rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
     }
 }

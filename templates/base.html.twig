@@ -10,34 +10,46 @@
     </head>
     <body>
         {% block header %}
-            <nav>
-                <div class="logo">
-                    {# //<a href="{{ path('app_Home') }}"><img src="/logo-lumiere.png" alt="logo"></a> #}
-                
-                </div>
-                <ul>
-                    <li><a class="{% if app.request.get('_route') == 'app_home' %}active{% endif %}" href="{{ path('app_home') }}">Accueil</a></li>
+            <header id="header">
+                <nav>
+                    {# <div class="logo">
+                        <a href="{{ path('app_home') }}">
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                        </a>
+                    </div> #}
+                    <ul class="navbar">
+                            <li><a class="{% if app.request.get('_route') == 'app_home' %}active{% endif %}" href="{{ path('app_home') }}">Accueil</a></li>
+                            <li><a class="{% if app.request.get('_route') == 'app_tournoi_list' %}active{% endif %}" href="{{ path('app_tournoi_list') }}">Les Tournois</a></li>
+                            {% if app.user %}
+                                <li><a class="{% if app.request.get('_route') == 'app_logout' %}active{% endif %}" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        {% else %}
+                            <li><a class="{% if app.request.get('_route') == 'app_inscription_user' %}active{% endif %}" href="{{ path('app_inscription_user') }}">Inscription</a></li>
+                            <li><a class="{% if app.request.get('_route') == 'app_login' %}active{% endif %}" href="{{ path('app_login') }}">Connexion</a></li>
+                        {% endif %}
 
-                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
-
-                    <li><a class="{% if app.request.get('_route') == 'app_tournoi_new' %}active{% endif %}" href="{{ path('app_tournoi_new') }}">Créer Un Tournoi</a></li>
-                    <li><a class="{% if app.request.get('_route') == 'app_joueur_new' %}active{% endif %}" href="{{ path('app_joueur_new') }}">Ajouter un Joueur</a></li>
-                    <li><a class="{% if app.request.get('_route') == 'app_joueur_list' %}active{% endif %}" href="{{ path('app_joueur_list') }}">Listes des Joueurs</a></li>
-
-
-                    {% endif %}
-                <li><a class="{% if app.request.get('_route') == 'app_tournoi_list' %}active{% endif %}" href="{{ path('app_tournoi_list') }}">Les Tournois</a></li>
-
-                    <li><a class="{% if app.request.attributes.get('_route') == 'app_inscription_user' %} active {% endif %}" href={{ path('app_inscription_user')}}>Inscription</a></li>
-                    <li><a class="{% if app.request.attributes.get('_route') == 'app_login' %} active {% endif %}" href={{ path('app_login')}}>Connexion</a></li>
-                    <li><a class="{% if app.request.attributes.get('_route') == 'app_logout' %} active {% endif %}" href={{ path('app_logout')}}>déconnexion</a></li>
-                </ul>
+                        {% if is_granted('ROLE_ADMIN')%}
+                            <li><a class="{% if app.request.get('_route') == 'app_joueur_new' %}active{% endif %}" href="{{ path('app_joueur_new') }}">Ajouter un Joueur</a></li>
+                            <li><a class="{% if app.request.get('_route') == 'app_joueur_list' %}active{% endif %}" href="{{ path('app_joueur_list') }}">Listes des Joueurs</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </header>
         {% endblock %}
 
         {% block main %}
         {% endblock %}
 
         {% block footer %}
+            <footer>
+                <div class="footer-container">
+                    <div class="footer-social">
+                        <a href=""><i class="fa-brands fa-instagram"></i></a>
+                        <a href=""><i class="fa-brands fa-youtube"></i></a>
+                        <a href=""><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <p class="footer-credit">&copy; 2024 - Tennis Club. Tous droits réservés.</p>
+            </footer>
         {% endblock %}
     </body>
 </html>
