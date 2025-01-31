@@ -21,6 +21,9 @@
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
 
                     <li><a class="{% if app.request.get('_route') == 'app_tournoi_new' %}active{% endif %}" href="{{ path('app_tournoi_new') }}">Créer Un Tournoi</a></li>
+                    <li><a class="{% if app.request.get('_route') == 'app_joueur_new' %}active{% endif %}" href="{{ path('app_joueur_new') }}">Ajouter un Joueur</a></li>
+                    <li><a class="{% if app.request.get('_route') == 'app_joueur_list' %}active{% endif %}" href="{{ path('app_joueur_list') }}">Listes des Joueurs</a></li>
+
 
                     {% endif %}
                 <li><a class="{% if app.request.get('_route') == 'app_tournoi_list' %}active{% endif %}" href="{{ path('app_tournoi_list') }}">Les Tournois</a></li>

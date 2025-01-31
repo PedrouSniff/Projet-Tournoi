@@ -19,7 +19,7 @@ class Joueur
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
-    private ?tournoi $tournoi = null;
+    private ?Tournoi $tournoi = null;
 
     /**
      * @var Collection<int, Matchs>

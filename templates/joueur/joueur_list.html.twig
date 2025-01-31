@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Joueurs{% endblock %}
+
+{% block main %}
+    <h1>Liste des Joueurs</h1>
+    <a href="{{ path('app_joueur_new') }}" class="btn btn-primary">Ajouter un Joueur</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Utilisateur</th>
+                <th>Tournoi</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for joueur in joueurs %}
+                <tr>
+                    <td>{{ joueur.id }}</td>
+                    <td>{{ joueur.user.nom }}</td>
+                    <td>{{ joueur.tournoi.name }}</td>
+                    <td>
+                        <a href="{{ path('app_joueur_edit', {'id': joueur.id}) }}" class="btn btn-warning">Modifier</a>
+                        <form method="post" action="{{ path('app_joueur_delete', {'id': joueur.id}) }}" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce joueur ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ joueur.id) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

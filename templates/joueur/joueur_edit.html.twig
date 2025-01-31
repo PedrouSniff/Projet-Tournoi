@@ -1,0 +1,18 @@
+{# templates/joueur/joueur_edit.html.twig #}
+
+{% block title %}Modifier un Joueur{% endblock %}
+
+{% block main %}
+    <h1>Modifier un Joueur</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.user) }}
+    {{ form_row(form.tournoi) }}
+    <button class="btn btn-success">Modifier</button>
+    {{ form_end(form) }}
+
+    <form method="POST" action="{{ path('app_joueur_delete', {'id': joueur.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce joueur ?');">
+        <button class="btn btn-danger">Supprimer ce joueur</button>
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ joueur.id) }}">
+    </form>
+{% endblock %}

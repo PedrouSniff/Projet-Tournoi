@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Joueur{% endblock %}
+
+{% block main %}
+    <h1>Ajouter un Joueur</h1>
+    {{ form_start(form) }}
+        {{ form_row(form.user) }}
+        {{ form_row(form.tournoi) }}
+        <button class="btn btn-success">Ajouter</button>
+    {{ form_end(form) }}
+{% endblock %}
