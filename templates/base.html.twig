@@ -18,11 +18,13 @@
                 <ul>
                     <li><a class="{% if app.request.get('_route') == 'app_home' %}active{% endif %}" href="{{ path('app_home') }}">Accueil</a></li>
 
-                    {# {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %} #}
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') %}
 
                     <li><a class="{% if app.request.get('_route') == 'app_tournoi_new' %}active{% endif %}" href="{{ path('app_tournoi_new') }}">Créer Un Tournoi</a></li>
 
-                    {# {% endif %} #}
+                    {% endif %}
+                <li><a class="{% if app.request.get('_route') == 'app_tournoi_list' %}active{% endif %}" href="{{ path('app_tournoi_list') }}">Les Tournois</a></li>
+
                     <li><a class="{% if app.request.attributes.get('_route') == 'app_inscription_user' %} active {% endif %}" href={{ path('app_inscription_user')}}>Inscription</a></li>
                     <li><a class="{% if app.request.attributes.get('_route') == 'app_login' %} active {% endif %}" href={{ path('app_login')}}>Connexion</a></li>
                     <li><a class="{% if app.request.attributes.get('_route') == 'app_logout' %} active {% endif %}" href={{ path('app_logout')}}>déconnexion</a></li>

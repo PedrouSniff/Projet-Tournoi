@@ -1,0 +1,16 @@
+{# templates/tournoi/tournoi_edit.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le tournoi{% endblock %}
+
+{% block main %}
+    <h1>Modifier le tournoi : {{ tournoi.name }}</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.status) }}
+        {# Ajoute d'autres champs si nécessaire #}
+        <button type="submit">Sauvegarder les modifications</button>
+    {{ form_end(form) }}
+{% endblock %}

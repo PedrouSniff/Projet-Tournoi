@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TournoiRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TournoiRepository::class)]
@@ -40,7 +41,10 @@ class Tournoi
     private Collection $matchs;
 
     #[ORM\ManyToOne(inversedBy: 'tournois')]
-    private ?user $User = null;
+    private ?User $user = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $image = null;  // Renommé de 'User' à 'user'
 
     public function __construct()
     {
@@ -161,14 +165,26 @@ class Tournoi
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;  // Changement de 'User' à 'user'
     }
 
-    public function setUser(?user $User): static
+    public function setUser(?User $user): static
     {
-        $this->User = $User;
+        $this->user = $user;  // Changement de 'User' à 'user'
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
