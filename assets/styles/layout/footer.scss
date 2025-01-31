@@ -3,19 +3,24 @@
 
 // FOOTER
 
-#footer {
-    background-color: v.$secondarycolor;
-    @include mixins.flex($direction:column);
+footer {
+    background-color: v.$titrecolor;
+    color: white;
     text-align: center;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
+    padding: 2rem 2rem;
 
-    img {
-        width: 65px;
-    }
 
-    a {
-        color: black;
+    .footer-container {
+        @include mixins.flex($direction: column, $align: center);
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+
+            a {
+                height: 30px;
+                color: white;
+            }
+        }
     }
 }
-

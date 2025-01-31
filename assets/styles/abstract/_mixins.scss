@@ -8,7 +8,7 @@
     flex-wrap: $wrap;
 }
 
-@mixin hover ($hcolor: var.$accentcolor) {
+@mixin hover ($hcolor: var.$secondarycolor) {
 
     transition: all 300ms;
 

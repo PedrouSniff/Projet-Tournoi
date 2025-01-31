@@ -3,47 +3,51 @@
 {% block title %}Liste des Tournois{% endblock %}
 
 {% block main %}
-    <h1>Liste des Tournois</h1>
+    <div class="tournois">
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_tournoi_new') }}" class="creation"> Créer un tournoi</a>
+        {% endif %}
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Statut</th>
-                <th>Date de création</th>
-                <th>Créé par</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for tournoi in tournois %}
-                <tr>
-                <td>
-                    {% if tournoi.image %}
-                        <img src="{{ asset('uploads/tournoi_images/' ~ tournoi.image) }}" alt="Image du tournoi" width="100" height="100">
-                    {% else %}
-                        Aucune image
-                    {% endif %}
-                </td>
-                    <td>{{ tournoi.id }}</td>
-                    <td>{{ tournoi.name }}</td>
-                    <td>{{ tournoi.status }}</td>
-                    <td>{{ tournoi.createdAt|date('d/m/Y H:i') }}</td>
-                    <td>{{ tournoi.user ? tournoi.user.nom : 'Inconnu' }}</td>
-                    <td>
-                        <a href="{{ path('app_tournoi_edit', {'id': tournoi.id}) }}">Modifier</a>
-                        <a href="{{ path('app_tournoi_delete', {'id': tournoi.id}) }}" 
-                           onclick="return confirm('Voulez-vous vraiment supprimer ce tournoi ?');">Supprimer</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">Aucun tournoi trouvé.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <h2> Liste des Tournois</h2>
 
-    <a href="{{ path('app_tournoi_new') }}">Créer un nouveau tournoi</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Statut</th>
+                    <th>Créé le</th>
+                    <th>Créé par</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tournoi in tournois %}
+                    <tr>
+                        <td>
+                            {% if tournoi.image %}
+                                <img src="{{ asset('uploads/tournoi_images/' ~ tournoi.image) }}" alt="Tournoi">
+                            {% else %}
+                                Aucune image
+                            {% endif %}
+                        </td>
+                        <td>{{ tournoi.name }}</td>
+                        <td>{{ tournoi.status }}</td>
+                        <td>{{ tournoi.createdAt|date('d/m/Y H:i') }}</td>
+                        <td>{{ tournoi.user ? tournoi.user.nom : 'Inconnu' }}</td>
+                        <td class="action-buttons">
+                            <a href="{{ path('app_tournoi_edit', {'id': tournoi.id}) }}" class="modifier">Modifier</a>
+                            <a href="{{ path('app_tournoi_delete', {'id': tournoi.id}) }}" class="delete" 
+                               onclick="return confirm('Voulez-vous vraiment supprimer ce tournoi ?');"> Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">Aucun tournoi trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
