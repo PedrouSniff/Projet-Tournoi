@@ -35,7 +35,7 @@ class JoueurController extends AbstractController
             $this->addFlash('success', 'Joueur ajouté avec succès !');
 
             // Redirection après ajout
-           return $this->redirectToRoute('app_joueur');
+           return $this->redirectToRoute('app_joueur_list');
         }
 
         // Affichage de la vue avec le formulaire
